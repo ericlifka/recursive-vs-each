@@ -73,6 +73,10 @@ let IndexController = Ember.Controller.extend({
         }
 
         return first;
+    },
+
+    randomColor() {
+        return '#'+Math.floor(Math.random()*16777215).toString(16);
     }
 });
 
