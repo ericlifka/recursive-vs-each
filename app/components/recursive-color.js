@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const ColorComponent = Ember.Component.extend({
+const RecursiveColorComponent = Ember.Component.extend({
     classNames: ['color-component'],
     attributeBindings: ['style'],
     item: null,
@@ -10,4 +10,4 @@ const ColorComponent = Ember.Component.extend({
     }.property('item.color')
 });
 
-export default ColorComponent;
+export default RecursiveColorComponent;
