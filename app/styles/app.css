@@ -54,4 +54,9 @@ html, body {
     padding: 0 0 10px 10px;
 }
 
-
+.color-component {
+    padding: 10px;
+    float: left;
+    min-width: 18px;
+    text-align: center;
+}
