@@ -4,4 +4,13 @@ html, body {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
+.controls {
+    padding: 10px;
+    float: left;
+    height: 75px;
+}
 
+.render-method {
+    padding: 10px;
+    height: 75px;
+}
