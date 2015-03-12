@@ -34,6 +34,7 @@ const IndexController = Ember.Controller.extend({
         clear() {
             this.set('iterativeDataStructure', null);
             this.set('recursiveDataStructure', null);
+            this.set('renderTime', null);
         },
 
         run() {
