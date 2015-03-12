@@ -69,7 +69,7 @@ const IndexController = Ember.Controller.extend({
     },
 
     createIterativeData(size) {
-        var arr = [];
+        const arr = [];
         for (let i = 0; i < size; i++) {
             arr.push(Ember.Object.create({
                 id: i,
@@ -95,7 +95,14 @@ const IndexController = Ember.Controller.extend({
     },
 
     createCustomData(size) {
-        return [];
+        const arr = [];
+        for (let i = 0; i < size; i++) {
+            arr.push(Ember.Object.create({
+                id: i,
+                template: `<div class="color-component" style="background-color: ${this.randomColor()};">${i}</div>`
+            }));
+        }
+        return arr;
     },
 
     randomColor() {
