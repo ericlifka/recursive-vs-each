@@ -20,10 +20,10 @@
     <div class="label">{{renderPaneLabel}}</div>
 
     {{#if recursiveRenderSelected}}
-        {{recursive-render}}
+        {{recursive-render data=recursiveDataStructure}}
     {{/if}}
 
     {{#if iterativeRenderSelected}}
-        {{iterative-render}}
+        {{iterative-render data=iterativeDataStructure}}
     {{/if}}
 </div>
