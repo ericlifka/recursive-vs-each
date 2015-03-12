@@ -34,6 +34,8 @@
     {{/if}}
 
     {{#if iterativeRenderSelected}}
-        {{iterative-render data=iterativeDataStructure}}
+        {{#each item in iterativeDataStructure}}
+            {{color-component item=item}}
+        {{/each}}
     {{/if}}
 </div>
