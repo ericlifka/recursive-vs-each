@@ -1,4 +1,6 @@
-{{item.id}}
+<div class="color-component" {{bind-attr style=style}}>
+    {{item.id}}
+</div>
 {{#if item.next}}
     {{recursive-color item=item.next}}
 {{/if}}
