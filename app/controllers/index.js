@@ -58,6 +58,21 @@ let IndexController = Ember.Controller.extend({
             }));
         }
         return arr;
+    },
+
+    createRecursiveData(size) {
+        const createObj = id => Ember.Object.create({
+            id, color: this.randomColor()
+        });
+
+        const first = createObj(0);
+        let current = first;
+        for (let i = 1; i < size.length; i++) {
+            current.next = createObj(i);
+            current = current.next;
+        }
+
+        return first;
     }
 });
 
