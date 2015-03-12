@@ -49,11 +49,14 @@ const IndexController = Ember.Controller.extend({
                 this.send('clear');
             }
             else {
+                const recursiveData = this.createRecursiveData(size);
+                const iterativeData = this.createIterativeData(size);
+
                 this.set('renderTime', null);
                 const start = (new Date()).valueOf();
 
-                this.set('iterativeDataStructure', this.createIterativeData(size));
-                this.set('recursiveDataStructure', this.createRecursiveData(size));
+                this.set('recursiveDataStructure', recursiveData);
+                this.set('iterativeDataStructure', iterativeData);
 
                 Ember.run.scheduleOnce('afterRender', null, () => {
                     const end = (new Date()).valueOf();
