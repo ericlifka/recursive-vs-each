@@ -21,8 +21,13 @@ html, body {
     padding: 6px 10px;
     border-radius: 4px;
     background: none;
+    background-color: #fdfdfd;
     border: 1px solid #C1C1C1;
     cursor: pointer;
+    outline: none;
+}
+.controls button:active {
+    background-color: #ededed;
 }
 
 .render-method {
