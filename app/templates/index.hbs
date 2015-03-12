@@ -7,11 +7,11 @@
 <div class="render-method">
     Rendering Method:
     <div class="recursive">
-        <input type="checkbox" {{bind-attr checked=recursiveRenderSelected}} {{action "selectRecursive"}} />
+        {{input type="checkbox" checked=recursiveRenderSelected action=selectRecursive}}
         <label {{action "selectRecursive"}}>Recursive</label>
     </div>
     <div class="iterative">
-        <input type="checkbox" {{bind-attr checked=iterativeRenderSelected}} {{action "selectIterative"}} />
+        {{input type="checkbox" checked=iterativeRenderSelected action=selectIterative}}
         <label {{action "selectIterative"}}>Iterative</label>
     </div>
 </div>
