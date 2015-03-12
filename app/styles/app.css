@@ -26,6 +26,7 @@ html, body {
     cursor: pointer;
     outline: none;
 }
+
 .controls button:active {
     background-color: #ededed;
 }
@@ -33,4 +34,13 @@ html, body {
 .render-method {
     padding: 20px;
     height: 75px;
+    color: #555555;
+}
+
+.render-method label {
+    cursor: pointer;
+}
+
+.render-method label:hover {
+    color: black;
 }
