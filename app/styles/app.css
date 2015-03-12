@@ -57,6 +57,15 @@ html, body {
 .color-component {
     padding: 10px;
     float: left;
-    min-width: 18px;
     text-align: center;
+}
+
+.render-pane.small .color-component {
+    min-width: 0;
+}
+.render-pane.medium .color-component {
+    min-width: 18px;
+}
+.render-pane.large .color-component {
+    min-width: 27px;
 }
