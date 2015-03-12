@@ -37,7 +37,11 @@ let IndexController = Ember.Controller.extend({
         },
 
         run() {
+            let input = this.get('dataStructureSize') || "0";
+            let size = parseInt(input, 10);
 
+            this.set('iterativeDataStructure', this.createIterativeData(size));
+            this.set('recursiveDataStructure', this.createRecursiveData(size));
         }
     }
 });
