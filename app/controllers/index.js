@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 let IndexController = Ember.Controller.extend({
     renderMethod: 'iterative',
+    dataStructureSize: null,
 
     recursiveRenderSelected: function () {
         return this.get('renderMethod') === 'recursive';
@@ -26,6 +27,14 @@ let IndexController = Ember.Controller.extend({
 
         selectIterative() {
             this.set('renderMethod', 'iterative');
+        },
+
+        clear() {
+
+        },
+
+        run() {
+
         }
     }
 });
