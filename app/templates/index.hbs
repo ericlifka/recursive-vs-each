@@ -18,6 +18,11 @@
 
 <div class="render-pane">
     <div class="label">{{renderPaneLabel}}</div>
+    <div class="elapsed">
+        {{#if renderTime}}
+            Time to render: {{renderTime}}ms
+        {{/if}}
+    </div>
 
     {{#if recursiveRenderSelected}}
         {{recursive-render data=recursiveDataStructure}}

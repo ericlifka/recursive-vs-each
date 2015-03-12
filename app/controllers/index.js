@@ -43,8 +43,16 @@ const IndexController = Ember.Controller.extend({
                 this.send('clear');
             }
             else {
+                this.set('renderTime', null);
+                const start = (new Date()).valueOf();
+
                 this.set('iterativeDataStructure', this.createIterativeData(size));
                 this.set('recursiveDataStructure', this.createRecursiveData(size));
+
+                Ember.run.scheduleOnce('afterRender', null, () => {
+                    const end = (new Date()).valueOf();
+                    this.set('renderTime', end - start);
+                });
             }
         }
     },
