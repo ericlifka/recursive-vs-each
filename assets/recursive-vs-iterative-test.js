@@ -19,11 +19,11 @@ define('recursive-vs-iterative-test/app', ['exports', 'ember', 'ember/resolver',
   exports['default'] = App;
 
 });
-define('recursive-vs-iterative-test/components/color-component', ['exports', 'ember'], function (exports, Ember) {
+define('recursive-vs-iterative-test/components/iterative-color', ['exports', 'ember'], function (exports, Ember) {
 
     'use strict';
 
-    var ColorComponent = Ember['default'].Component.extend({
+    var IterativeColorComponent = Ember['default'].Component.extend({
         classNames: ["color-component"],
         attributeBindings: ["style"],
         item: null,
@@ -33,25 +33,22 @@ define('recursive-vs-iterative-test/components/color-component', ['exports', 'em
         }).property("item.color")
     });
 
-    exports['default'] = ColorComponent;
+    exports['default'] = IterativeColorComponent;
 
 });
-define('recursive-vs-iterative-test/components/iterative-render', ['exports', 'ember'], function (exports, Ember) {
+define('recursive-vs-iterative-test/components/recursive-color', ['exports', 'ember'], function (exports, Ember) {
 
-	'use strict';
+    'use strict';
 
-	var IterativeRenderComponent = Ember['default'].Component.extend({});
+    var RecursiveColorComponent = Ember['default'].Component.extend({
+        item: null,
 
-	exports['default'] = IterativeRenderComponent;
+        style: (function () {
+            return "background-color: " + this.get("item.color") + ";";
+        }).property("item.color")
+    });
 
-});
-define('recursive-vs-iterative-test/components/recursive-render', ['exports', 'ember'], function (exports, Ember) {
-
-	'use strict';
-
-	var RecursiveRenderComponent = Ember['default'].Component.extend({});
-
-	exports['default'] = RecursiveRenderComponent;
+    exports['default'] = RecursiveColorComponent;
 
 });
 define('recursive-vs-iterative-test/controllers/index', ['exports', 'ember'], function (exports, Ember) {
@@ -251,7 +248,7 @@ define('recursive-vs-iterative-test/templates/application', ['exports'], functio
   }()));
 
 });
-define('recursive-vs-iterative-test/templates/components/color-component', ['exports'], function (exports) {
+define('recursive-vs-iterative-test/templates/components/iterative-color', ['exports'], function (exports) {
 
   'use strict';
 
@@ -265,7 +262,7 @@ define('recursive-vs-iterative-test/templates/components/color-component', ['exp
         var el0 = dom.createDocumentFragment();
         var el1 = dom.createTextNode("");
         dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n");
+        var el1 = dom.createTextNode("");
         dom.appendChild(el0, el1);
         return el0;
       },
@@ -289,7 +286,7 @@ define('recursive-vs-iterative-test/templates/components/color-component', ['exp
         } else {
           fragment = this.build(dom);
         }
-        if (this.cachedFragment) { dom.repairClonedNode(fragment,[0]); }
+        if (this.cachedFragment) { dom.repairClonedNode(fragment,[0,1]); }
         var morph0 = dom.createMorphAt(fragment,0,1,contextualElement);
         content(env, morph0, context, "item.id");
         return fragment;
@@ -298,7 +295,7 @@ define('recursive-vs-iterative-test/templates/components/color-component', ['exp
   }()));
 
 });
-define('recursive-vs-iterative-test/templates/components/iterative-render', ['exports'], function (exports) {
+define('recursive-vs-iterative-test/templates/components/recursive-color', ['exports'], function (exports) {
 
   'use strict';
 
@@ -338,7 +335,7 @@ define('recursive-vs-iterative-test/templates/components/iterative-render', ['ex
             fragment = this.build(dom);
           }
           var morph0 = dom.createMorphAt(fragment,0,1,contextualElement);
-          inline(env, morph0, context, "color-component", [], {"item": get(env, context, "item")});
+          inline(env, morph0, context, "recursive-color", [], {"item": get(env, context, "item.next")});
           return fragment;
         }
       };
@@ -350,94 +347,12 @@ define('recursive-vs-iterative-test/templates/components/iterative-render', ['ex
       hasRendered: false,
       build: function build(dom) {
         var el0 = dom.createDocumentFragment();
-        var el1 = dom.createTextNode("");
-        dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("");
-        dom.appendChild(el0, el1);
-        return el0;
-      },
-      render: function render(context, env, contextualElement) {
-        var dom = env.dom;
-        var hooks = env.hooks, get = hooks.get, block = hooks.block;
-        dom.detectNamespace(contextualElement);
-        var fragment;
-        if (env.useFragmentCache && dom.canClone) {
-          if (this.cachedFragment === null) {
-            fragment = this.build(dom);
-            if (this.hasRendered) {
-              this.cachedFragment = fragment;
-            } else {
-              this.hasRendered = true;
-            }
-          }
-          if (this.cachedFragment) {
-            fragment = dom.cloneNode(this.cachedFragment, true);
-          }
-        } else {
-          fragment = this.build(dom);
-        }
-        if (this.cachedFragment) { dom.repairClonedNode(fragment,[0,1]); }
-        var morph0 = dom.createMorphAt(fragment,0,1,contextualElement);
-        block(env, morph0, context, "each", [get(env, context, "data")], {"keyword": "item"}, child0, null);
-        return fragment;
-      }
-    };
-  }()));
-
-});
-define('recursive-vs-iterative-test/templates/components/recursive-render', ['exports'], function (exports) {
-
-  'use strict';
-
-  exports['default'] = Ember.HTMLBars.template((function() {
-    var child0 = (function() {
-      return {
-        isHTMLBars: true,
-        blockParams: 0,
-        cachedFragment: null,
-        hasRendered: false,
-        build: function build(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("    ");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        render: function render(context, env, contextualElement) {
-          var dom = env.dom;
-          var hooks = env.hooks, get = hooks.get, inline = hooks.inline;
-          dom.detectNamespace(contextualElement);
-          var fragment;
-          if (env.useFragmentCache && dom.canClone) {
-            if (this.cachedFragment === null) {
-              fragment = this.build(dom);
-              if (this.hasRendered) {
-                this.cachedFragment = fragment;
-              } else {
-                this.hasRendered = true;
-              }
-            }
-            if (this.cachedFragment) {
-              fragment = dom.cloneNode(this.cachedFragment, true);
-            }
-          } else {
-            fragment = this.build(dom);
-          }
-          var morph0 = dom.createMorphAt(fragment,0,1,contextualElement);
-          inline(env, morph0, context, "recursive-render", [], {"data": get(env, context, "data.next")});
-          return fragment;
-        }
-      };
-    }());
-    return {
-      isHTMLBars: true,
-      blockParams: 0,
-      cachedFragment: null,
-      hasRendered: false,
-      build: function build(dom) {
-        var el0 = dom.createDocumentFragment();
-        var el1 = dom.createTextNode("");
+        var el1 = dom.createElement("div");
+        dom.setAttribute(el1,"class","color-component");
+        var el2 = dom.createTextNode("\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
@@ -447,7 +362,7 @@ define('recursive-vs-iterative-test/templates/components/recursive-render', ['ex
       },
       render: function render(context, env, contextualElement) {
         var dom = env.dom;
-        var hooks = env.hooks, get = hooks.get, inline = hooks.inline, block = hooks.block;
+        var hooks = env.hooks, get = hooks.get, element = hooks.element, content = hooks.content, block = hooks.block;
         dom.detectNamespace(contextualElement);
         var fragment;
         if (env.useFragmentCache && dom.canClone) {
@@ -465,11 +380,13 @@ define('recursive-vs-iterative-test/templates/components/recursive-render', ['ex
         } else {
           fragment = this.build(dom);
         }
-        if (this.cachedFragment) { dom.repairClonedNode(fragment,[0,2]); }
-        var morph0 = dom.createMorphAt(fragment,0,1,contextualElement);
+        if (this.cachedFragment) { dom.repairClonedNode(fragment,[2]); }
+        var element0 = dom.childAt(fragment, [0]);
+        var morph0 = dom.createMorphAt(element0,0,1);
         var morph1 = dom.createMorphAt(fragment,1,2,contextualElement);
-        inline(env, morph0, context, "color-component", [], {"item": get(env, context, "data")});
-        block(env, morph1, context, "if", [get(env, context, "data.next")], {}, child0, null);
+        element(env, element0, context, "bind-attr", [], {"style": get(env, context, "style")});
+        content(env, morph0, context, "item.id");
+        block(env, morph1, context, "if", [get(env, context, "item.next")], {}, child0, null);
         return fragment;
       }
     };
@@ -589,12 +506,52 @@ define('recursive-vs-iterative-test/templates/index', ['exports'], function (exp
             fragment = this.build(dom);
           }
           var morph0 = dom.createMorphAt(fragment,0,1,contextualElement);
-          inline(env, morph0, context, "recursive-render", [], {"data": get(env, context, "recursiveDataStructure")});
+          inline(env, morph0, context, "recursive-color", [], {"item": get(env, context, "recursiveDataStructure")});
           return fragment;
         }
       };
     }());
     var child3 = (function() {
+      var child0 = (function() {
+        return {
+          isHTMLBars: true,
+          blockParams: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          build: function build(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("            ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          render: function render(context, env, contextualElement) {
+            var dom = env.dom;
+            var hooks = env.hooks, get = hooks.get, inline = hooks.inline;
+            dom.detectNamespace(contextualElement);
+            var fragment;
+            if (env.useFragmentCache && dom.canClone) {
+              if (this.cachedFragment === null) {
+                fragment = this.build(dom);
+                if (this.hasRendered) {
+                  this.cachedFragment = fragment;
+                } else {
+                  this.hasRendered = true;
+                }
+              }
+              if (this.cachedFragment) {
+                fragment = dom.cloneNode(this.cachedFragment, true);
+              }
+            } else {
+              fragment = this.build(dom);
+            }
+            var morph0 = dom.createMorphAt(fragment,0,1,contextualElement);
+            inline(env, morph0, context, "iterative-color", [], {"item": get(env, context, "item")});
+            return fragment;
+          }
+        };
+      }());
       return {
         isHTMLBars: true,
         blockParams: 0,
@@ -602,15 +559,15 @@ define('recursive-vs-iterative-test/templates/index', ['exports'], function (exp
         hasRendered: false,
         build: function build(dom) {
           var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("        ");
+          var el1 = dom.createTextNode("");
           dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
+          var el1 = dom.createTextNode("");
           dom.appendChild(el0, el1);
           return el0;
         },
         render: function render(context, env, contextualElement) {
           var dom = env.dom;
-          var hooks = env.hooks, get = hooks.get, inline = hooks.inline;
+          var hooks = env.hooks, get = hooks.get, block = hooks.block;
           dom.detectNamespace(contextualElement);
           var fragment;
           if (env.useFragmentCache && dom.canClone) {
@@ -628,8 +585,9 @@ define('recursive-vs-iterative-test/templates/index', ['exports'], function (exp
           } else {
             fragment = this.build(dom);
           }
+          if (this.cachedFragment) { dom.repairClonedNode(fragment,[0,1]); }
           var morph0 = dom.createMorphAt(fragment,0,1,contextualElement);
-          inline(env, morph0, context, "iterative-render", [], {"data": get(env, context, "iterativeDataStructure")});
+          block(env, morph0, context, "each", [get(env, context, "iterativeDataStructure")], {"keyword": "item"}, child0, null);
           return fragment;
         }
       };
@@ -791,33 +749,23 @@ define('recursive-vs-iterative-test/tests/app.jshint', function () {
   });
 
 });
-define('recursive-vs-iterative-test/tests/components/color-component.jshint', function () {
+define('recursive-vs-iterative-test/tests/components/iterative-color.jshint', function () {
 
   'use strict';
 
   module('JSHint - components');
-  test('components/color-component.js should pass jshint', function() { 
-    ok(true, 'components/color-component.js should pass jshint.'); 
+  test('components/iterative-color.js should pass jshint', function() { 
+    ok(true, 'components/iterative-color.js should pass jshint.'); 
   });
 
 });
-define('recursive-vs-iterative-test/tests/components/iterative-render.jshint', function () {
+define('recursive-vs-iterative-test/tests/components/recursive-color.jshint', function () {
 
   'use strict';
 
   module('JSHint - components');
-  test('components/iterative-render.js should pass jshint', function() { 
-    ok(true, 'components/iterative-render.js should pass jshint.'); 
-  });
-
-});
-define('recursive-vs-iterative-test/tests/components/recursive-render.jshint', function () {
-
-  'use strict';
-
-  module('JSHint - components');
-  test('components/recursive-render.js should pass jshint', function() { 
-    ok(true, 'components/recursive-render.js should pass jshint.'); 
+  test('components/recursive-color.js should pass jshint', function() { 
+    ok(true, 'components/recursive-color.js should pass jshint.'); 
   });
 
 });
@@ -943,7 +891,7 @@ catch(err) {
 if (runningTests) {
   require("recursive-vs-iterative-test/tests/test-helper");
 } else {
-  require("recursive-vs-iterative-test/app")["default"].create({"name":"recursive-vs-iterative-test","version":"0.0.0.6d8755cd"});
+  require("recursive-vs-iterative-test/app")["default"].create({"name":"recursive-vs-iterative-test","version":"0.0.0.f8c864c6"});
 }
 
 /* jshint ignore:end */
