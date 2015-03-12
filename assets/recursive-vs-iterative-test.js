@@ -19,6 +19,37 @@ define('recursive-vs-iterative-test/app', ['exports', 'ember', 'ember/resolver',
   exports['default'] = App;
 
 });
+define('recursive-vs-iterative-test/components/custom-color', ['exports', 'ember'], function (exports, Ember) {
+
+    'use strict';
+
+    var CustomColorComponent = Ember['default'].Component.extend({
+        items: null,
+
+        renderObserver: (function () {
+            this.rerender();
+        }).observes("items.@each.color"),
+
+        render: function render(buffer) {
+            var _this = this;
+
+            console.log("render");
+            var items = this.get("items");
+            if (items) {
+                items.forEach(function (item) {
+                    return buffer.push(_this.getMarkup(item));
+                });
+            }
+        },
+
+        getMarkup: function getMarkup(item) {
+            return "\n            <div class=\"color-component\" style=\"background-color: " + item.get("color") + ";\">\n                    " + item.get("id") + "\n            </div>\n        ";
+        }
+    });
+
+    exports['default'] = CustomColorComponent;
+
+});
 define('recursive-vs-iterative-test/components/iterative-color', ['exports', 'ember'], function (exports, Ember) {
 
     'use strict';
@@ -69,13 +100,13 @@ define('recursive-vs-iterative-test/controllers/index', ['exports', 'ember'], fu
             return this.get("renderMethod") === "iterative";
         }).property("renderMethod"),
 
-        actions: {
-            selectRecursive: function selectRecursive() {
-                this.set("renderMethod", "recursive");
-            },
+        customRenderSelected: (function () {
+            return this.get("renderMethod") === "custom";
+        }).property("renderMethod"),
 
-            selectIterative: function selectIterative() {
-                this.set("renderMethod", "iterative");
+        actions: {
+            selectRender: function selectRender(type) {
+                this.set("renderMethod", type);
             },
 
             clear: function clear() {
@@ -592,6 +623,46 @@ define('recursive-vs-iterative-test/templates/index', ['exports'], function (exp
         }
       };
     }());
+    var child4 = (function() {
+      return {
+        isHTMLBars: true,
+        blockParams: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        build: function build(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("        ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        render: function render(context, env, contextualElement) {
+          var dom = env.dom;
+          var hooks = env.hooks, get = hooks.get, inline = hooks.inline;
+          dom.detectNamespace(contextualElement);
+          var fragment;
+          if (env.useFragmentCache && dom.canClone) {
+            if (this.cachedFragment === null) {
+              fragment = this.build(dom);
+              if (this.hasRendered) {
+                this.cachedFragment = fragment;
+              } else {
+                this.hasRendered = true;
+              }
+            }
+            if (this.cachedFragment) {
+              fragment = dom.cloneNode(this.cachedFragment, true);
+            }
+          } else {
+            fragment = this.build(dom);
+          }
+          var morph0 = dom.createMorphAt(fragment,0,1,contextualElement);
+          inline(env, morph0, context, "custom-color", [], {"items": get(env, context, "iterativeDataStructure")});
+          return fragment;
+        }
+      };
+    }());
     return {
       isHTMLBars: true,
       blockParams: 0,
@@ -665,6 +736,21 @@ define('recursive-vs-iterative-test/templates/index', ['exports'], function (exp
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("div");
+        dom.setAttribute(el2,"class","custom");
+        var el3 = dom.createTextNode("\n        ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n        ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("label");
+        var el4 = dom.createTextNode("Custom");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
@@ -683,6 +769,10 @@ define('recursive-vs-iterative-test/templates/index', ['exports'], function (exp
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
         return el0;
       },
@@ -714,25 +804,32 @@ define('recursive-vs-iterative-test/templates/index', ['exports'], function (exp
         var element5 = dom.childAt(element4, [2]);
         var element6 = dom.childAt(element3, [3]);
         var element7 = dom.childAt(element6, [2]);
-        var element8 = dom.childAt(fragment, [6]);
+        var element8 = dom.childAt(element3, [5]);
+        var element9 = dom.childAt(element8, [2]);
+        var element10 = dom.childAt(fragment, [6]);
         var morph0 = dom.createMorphAt(dom.childAt(fragment, [0]),0,-1);
         var morph1 = dom.createMorphAt(dom.childAt(element0, [1]),0,1);
         var morph2 = dom.createMorphAt(element4,0,1);
         var morph3 = dom.createMorphAt(element6,0,1);
-        var morph4 = dom.createMorphAt(dom.childAt(element8, [1]),0,-1);
-        var morph5 = dom.createMorphAt(element8,2,3);
-        var morph6 = dom.createMorphAt(element8,3,-1);
+        var morph4 = dom.createMorphAt(element8,0,1);
+        var morph5 = dom.createMorphAt(dom.childAt(element10, [1]),0,-1);
+        var morph6 = dom.createMorphAt(element10,2,3);
+        var morph7 = dom.createMorphAt(element10,3,4);
+        var morph8 = dom.createMorphAt(element10,4,-1);
         block(env, morph0, context, "if", [get(env, context, "renderTime")], {}, child0, child1);
         inline(env, morph1, context, "input", [], {"value": get(env, context, "dataStructureSize"), "placeholder": "entity count"});
         element(env, element1, context, "action", ["clear"], {});
         element(env, element2, context, "action", ["run"], {});
         inline(env, morph2, context, "input", [], {"type": "checkbox", "checked": get(env, context, "recursiveRenderSelected"), "disabled": true});
-        element(env, element5, context, "action", ["selectRecursive"], {});
+        element(env, element5, context, "action", ["selectRender", "recursive"], {});
         inline(env, morph3, context, "input", [], {"type": "checkbox", "checked": get(env, context, "iterativeRenderSelected"), "disabled": true});
-        element(env, element7, context, "action", ["selectIterative"], {});
-        content(env, morph4, context, "renderMethod");
-        block(env, morph5, context, "if", [get(env, context, "recursiveRenderSelected")], {}, child2, null);
-        block(env, morph6, context, "if", [get(env, context, "iterativeRenderSelected")], {}, child3, null);
+        element(env, element7, context, "action", ["selectRender", "iterative"], {});
+        inline(env, morph4, context, "input", [], {"type": "checkbox", "checked": get(env, context, "customRenderSelected"), "disabled": true});
+        element(env, element9, context, "action", ["selectRender", "custom"], {});
+        content(env, morph5, context, "renderMethod");
+        block(env, morph6, context, "if", [get(env, context, "recursiveRenderSelected")], {}, child2, null);
+        block(env, morph7, context, "if", [get(env, context, "iterativeRenderSelected")], {}, child3, null);
+        block(env, morph8, context, "if", [get(env, context, "customRenderSelected")], {}, child4, null);
         return fragment;
       }
     };
@@ -746,6 +843,16 @@ define('recursive-vs-iterative-test/tests/app.jshint', function () {
   module('JSHint - .');
   test('app.js should pass jshint', function() { 
     ok(true, 'app.js should pass jshint.'); 
+  });
+
+});
+define('recursive-vs-iterative-test/tests/components/custom-color.jshint', function () {
+
+  'use strict';
+
+  module('JSHint - components');
+  test('components/custom-color.js should pass jshint', function() { 
+    ok(true, 'components/custom-color.js should pass jshint.'); 
   });
 
 });
@@ -891,7 +998,7 @@ catch(err) {
 if (runningTests) {
   require("recursive-vs-iterative-test/tests/test-helper");
 } else {
-  require("recursive-vs-iterative-test/app")["default"].create({"name":"recursive-vs-iterative-test","version":"0.0.0.f8c864c6"});
+  require("recursive-vs-iterative-test/app")["default"].create({"name":"recursive-vs-iterative-test","version":"0.0.0.9c96f400"});
 }
 
 /* jshint ignore:end */
