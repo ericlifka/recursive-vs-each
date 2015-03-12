@@ -1,4 +1,18 @@
-{{input value=dataStructureSize}}
-<button {{action "clear"}}>Clear</button>
-<button {{action "run"}}>Run</button>
+<div class="controls">
+    {{input value=dataStructureSize}}
+    <button {{action "clear"}}>Clear</button>
+    <button {{action "run"}}>Run</button>
+</div>
+
+<div class="render-method">
+    Rendering Method:
+    <div class="recursive">
+        <input type="checkbox" checked="checked" {{action "selectRecursive"}} />
+        <label {{action "selectRecursive"}}>Recursive</label>
+    </div>
+    <div class="iterative">
+        <input type="checkbox" checked="checked" {{action "selectIterative"}} />
+        <label {{action "selectIterative"}}>Iterative</label>
+    </div>
+</div>
 
