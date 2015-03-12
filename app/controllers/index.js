@@ -43,6 +43,17 @@ let IndexController = Ember.Controller.extend({
             this.set('iterativeDataStructure', this.createIterativeData(size));
             this.set('recursiveDataStructure', this.createRecursiveData(size));
         }
+    },
+
+    createIterativeData(size) {
+        var arr = [];
+        for (let i = 0; i < size.length; i++) {
+            arr.push(Ember.Object.create({
+                id: i,
+                color: this.randomColor()
+            }));
+        }
+        return arr;
     }
 });
 
