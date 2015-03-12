@@ -1,3 +1,11 @@
+<div class="elapsed">
+    {{#if renderTime}}
+        Time to render: {{renderTime}}ms
+    {{else}}
+        &nbsp;
+    {{/if}}
+</div>
+
 <div class="controls">
     <div>
         {{input value=dataStructureSize placeholder="entity count"}}
@@ -20,11 +28,6 @@
 
 <div class="render-pane">
     <div class="label">{{renderPaneLabel}}</div>
-    <div class="elapsed">
-        {{#if renderTime}}
-            Time to render: {{renderTime}}ms
-        {{/if}}
-    </div>
 
     {{#if recursiveRenderSelected}}
         {{recursive-render data=recursiveDataStructure}}
