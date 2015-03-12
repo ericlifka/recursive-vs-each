@@ -11,7 +11,15 @@ let IndexController = Ember.Controller.extend({
         return this.get('renderMethod') === 'iterative';
     }.property('renderMethod'),
 
+    actions: {
+        selectRecursive() {
+            this.set('renderMethod', 'recursive');
+        },
 
+        selectIterative() {
+            this.set('renderMethod', 'iterative');
+        }
+    }
 });
 
 export default IndexController;
