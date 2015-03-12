@@ -12,10 +12,10 @@ const IndexController = Ember.Controller.extend({
             return "small";
         }
         else if (size <= 100) {
-            return "medium"
+            return "medium";
         }
         else {
-            return "large"
+            return "large";
         }
     }.property('iterativeDataStructure.length'),
 
