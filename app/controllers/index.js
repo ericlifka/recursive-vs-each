@@ -11,6 +11,14 @@ let IndexController = Ember.Controller.extend({
         return this.get('renderMethod') === 'iterative';
     }.property('renderMethod'),
 
+    renderPaneLabel: function () {
+        switch(this.get('renderMethod')) {
+            case 'recursive': return "Recursive Render";
+            case 'iterative': return "Iterative Render";
+            default: return "No Render selected";
+        }
+    }.property('renderMethod'),
+
     actions: {
         selectRecursive() {
             this.set('renderMethod', 'recursive');
