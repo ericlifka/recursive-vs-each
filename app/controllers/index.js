@@ -51,7 +51,7 @@ const IndexController = Ember.Controller.extend({
 
     createIterativeData(size) {
         var arr = [];
-        for (let i = 0; i < size.length; i++) {
+        for (let i = 0; i < size; i++) {
             arr.push(Ember.Object.create({
                 id: i,
                 color: this.randomColor()
@@ -67,7 +67,7 @@ const IndexController = Ember.Controller.extend({
 
         const first = createObj(0);
         let current = first;
-        for (let i = 1; i < size.length; i++) {
+        for (let i = 1; i < size; i++) {
             current.next = createObj(i);
             current = current.next;
         }
