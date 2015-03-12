@@ -42,4 +42,8 @@
             {{iterative-color item=item}}
         {{/each}}
     {{/if}}
+
+    {{#if customRenderSelected}}
+        {{custom-color items=iterativeDataStructure}}
+    {{/if}}
 </div>
