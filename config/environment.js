@@ -4,7 +4,7 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'recursive-vs-iterative-test',
     environment: environment,
-    baseURL: '/',
+    baseURL: '/recursive-vs-each',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {
