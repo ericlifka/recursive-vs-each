@@ -14,13 +14,13 @@ const IndexController = Ember.Controller.extend({
         return this.get('renderMethod') === 'iterative';
     }.property('renderMethod'),
 
-    actions: {
-        selectRecursive() {
-            this.set('renderMethod', 'recursive');
-        },
+    customRenderSelected: function () {
+        return this.get('renderMethod') === 'custom';
+    }.property('renderMethod'),
 
-        selectIterative() {
-            this.set('renderMethod', 'iterative');
+    actions: {
+        selectRender(type) {
+            this.set('renderMethod', type);
         },
 
         clear() {
