@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-let IndexController = Ember.Controller.extend({
+const IndexController = Ember.Controller.extend({
     renderMethod: 'iterative',
     dataStructureSize: null,
     iterativeDataStructure: null,
