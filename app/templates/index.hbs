@@ -19,6 +19,11 @@
 <div class="render-pane">
     <div class="label">{{renderPaneLabel}}</div>
 
-    {{recursive-render}}
-    {{iterative-render}}
+    {{#if recursiveRenderSelected}}
+        {{recursive-render}}
+    {{/if}}
+
+    {{#if iterativeRenderSelected}}
+        {{iterative-render}}
+    {{/if}}
 </div>
