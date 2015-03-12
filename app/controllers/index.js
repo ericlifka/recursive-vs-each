@@ -51,12 +51,14 @@ const IndexController = Ember.Controller.extend({
             else {
                 const recursiveData = this.createRecursiveData(size);
                 const iterativeData = this.createIterativeData(size);
+                const customData = this.createCustomData(size);
 
                 this.set('renderTime', null);
                 const start = (new Date()).valueOf();
 
                 this.set('recursiveDataStructure', recursiveData);
                 this.set('iterativeDataStructure', iterativeData);
+                this.set('customDataStructure', customData);
 
                 Ember.run.scheduleOnce('afterRender', null, () => {
                     const end = (new Date()).valueOf();
@@ -90,6 +92,10 @@ const IndexController = Ember.Controller.extend({
         }
 
         return first;
+    },
+
+    createCustomData(size) {
+        return [];
     },
 
     randomColor() {
