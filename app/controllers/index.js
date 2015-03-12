@@ -6,6 +6,19 @@ const IndexController = Ember.Controller.extend({
     iterativeDataStructure: null,
     recursiveDataStructure: null,
 
+    itemCountBreakover: function () {
+        const size = this.get('iterativeDataStructure.length');
+        if (size <= 10) {
+            return "small";
+        }
+        else if (size <= 100) {
+            return "medium"
+        }
+        else {
+            return "large"
+        }
+    }.property('iterativeDataStructure.length'),
+
     recursiveRenderSelected: function () {
         return this.get('renderMethod') === 'recursive';
     }.property('renderMethod'),
