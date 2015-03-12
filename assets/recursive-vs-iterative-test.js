@@ -92,6 +92,17 @@ define('recursive-vs-iterative-test/controllers/index', ['exports', 'ember'], fu
         iterativeDataStructure: null,
         recursiveDataStructure: null,
 
+        itemCountBreakover: (function () {
+            var size = this.get("iterativeDataStructure.length");
+            if (size <= 10) {
+                return "small";
+            } else if (size <= 100) {
+                return "medium";
+            } else {
+                return "large";
+            }
+        }).property("iterativeDataStructure.length"),
+
         recursiveRenderSelected: (function () {
             return this.get("renderMethod") === "recursive";
         }).property("renderMethod"),
@@ -757,7 +768,6 @@ define('recursive-vs-iterative-test/templates/index', ['exports'], function (exp
         var el1 = dom.createTextNode("\n\n");
         dom.appendChild(el0, el1);
         var el1 = dom.createElement("div");
-        dom.setAttribute(el1,"class","render-pane");
         var el2 = dom.createTextNode("\n    ");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("div");
@@ -826,6 +836,7 @@ define('recursive-vs-iterative-test/templates/index', ['exports'], function (exp
         element(env, element7, context, "action", ["selectRender", "iterative"], {});
         inline(env, morph4, context, "input", [], {"type": "checkbox", "checked": get(env, context, "customRenderSelected"), "disabled": true});
         element(env, element9, context, "action", ["selectRender", "custom"], {});
+        element(env, element10, context, "bind-attr", [], {"class": ":render-pane itemCountBreakover"});
         content(env, morph5, context, "renderMethod");
         block(env, morph6, context, "if", [get(env, context, "recursiveRenderSelected")], {}, child2, null);
         block(env, morph7, context, "if", [get(env, context, "iterativeRenderSelected")], {}, child3, null);
@@ -998,7 +1009,7 @@ catch(err) {
 if (runningTests) {
   require("recursive-vs-iterative-test/tests/test-helper");
 } else {
-  require("recursive-vs-iterative-test/app")["default"].create({"name":"recursive-vs-iterative-test","version":"0.0.0.9c96f400"});
+  require("recursive-vs-iterative-test/app")["default"].create({"name":"recursive-vs-iterative-test","version":"0.0.0.8383f0fc"});
 }
 
 /* jshint ignore:end */
