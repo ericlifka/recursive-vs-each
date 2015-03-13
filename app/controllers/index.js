@@ -35,7 +35,7 @@ const IndexController = Ember.Controller.extend({
         selectRender(type) {
             this.send('clear');
             this.set('renderMethod', type);
-            this.send('run');
+            Ember.run.scheduleOnce('afterRender', null, () => this.send('run'));
         },
 
         clear() {
