@@ -35,7 +35,7 @@ const IndexController = Ember.Controller.extend({
         selectRender(type) {
             this.send('clear');
             this.set('renderMethod', type);
-            Ember.run.scheduleOnce('afterRender', null, () => this.send('run'));
+            Ember.run.scheduleOnce('afterRender', () => this.send('run'));
         },
 
         clear() {
@@ -61,7 +61,7 @@ const IndexController = Ember.Controller.extend({
             const start = (new Date()).valueOf();
 
             this.setProperties(data);   // Trigger Render
-            Ember.run.scheduleOnce('afterRender', null, () => {
+            Ember.run.scheduleOnce('afterRender', () => {
                 const end = (new Date()).valueOf();
                 this.set('renderTime', end - start);
             });
