@@ -28,6 +28,10 @@
         {{input type="checkbox" checked=customRenderSelected disabled=true}}
         <label {{action "selectRender" "custom"}}>Custom</label>
     </div>
+    <div class="cached">
+        {{input type="checkbox" checked=cachedRenderSelected disabled=true}}
+        <label {{action "selectRender" "cached"}}>Cached</label>
+    </div>
 </div>
 
 <div {{bind-attr class=":render-pane itemCountBreakover"}}>
@@ -45,5 +49,9 @@
 
     {{#if customRenderSelected}}
         {{custom-color items=customDataStructure}}
+    {{/if}}
+
+    {{#if cachedRenderSelected}}
+        {{cached-color items=customDataStructure}}
     {{/if}}
 </div>

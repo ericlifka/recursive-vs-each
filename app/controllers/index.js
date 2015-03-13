@@ -31,6 +31,10 @@ const IndexController = Ember.Controller.extend({
         return this.get('renderMethod') === 'custom';
     }.property('renderMethod'),
 
+    cachedRenderSelected: function () {
+        return this.get('renderMethod') === 'cached';
+    }.property('renderMethod'),
+
     actions: {
         selectRender(type) {
             this.send('clear');
