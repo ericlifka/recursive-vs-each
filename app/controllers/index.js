@@ -45,28 +45,26 @@ const IndexController = Ember.Controller.extend({
         },
 
         run() {
-            let input = this.get('dataStructureSize') || "0";
-            let size = parseInt(input, 10);
+            const input = this.get('dataStructureSize') || "0";
+            const size = parseInt(input, 10);
             if (size === 0) {
                 this.send('clear');
+                return;
             }
-            else {
-                const recursiveData = this.createRecursiveData(size);
-                const iterativeData = this.createIterativeData(size);
-                const customData = this.createCustomData(size);
 
-                this.set('renderTime', null);
-                const start = (new Date()).valueOf();
+            const data = {
+                recursiveDataStructure: this.createRecursiveData(size),
+                iterativeDataStructure: this.createIterativeData(size),
+                customDataStructure: this.createCustomData(size),
+                renderTime: null
+            };
+            const start = (new Date()).valueOf();
 
-                this.set('recursiveDataStructure', recursiveData);
-                this.set('iterativeDataStructure', iterativeData);
-                this.set('customDataStructure', customData);
-
-                Ember.run.scheduleOnce('afterRender', null, () => {
-                    const end = (new Date()).valueOf();
-                    this.set('renderTime', end - start);
-                });
-            }
+            this.setProperties(data);   // Trigger Render
+            Ember.run.scheduleOnce('afterRender', null, () => {
+                const end = (new Date()).valueOf();
+                this.set('renderTime', end - start);
+            });
         }
     },
 
