@@ -99,6 +99,7 @@ const IndexController = Ember.Controller.extend({
         for (let i = 0; i < size; i++) {
             arr.push(Ember.Object.create({
                 id: i,
+                color: this.randomColor(),
                 template: `<div class="color-component" style="background-color: ${this.randomColor()};">${i}</div>`
             }));
         }
