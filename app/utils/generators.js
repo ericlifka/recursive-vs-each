@@ -1,7 +1,7 @@
 const randomColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 
 export default Ember.Object.create({
-    createIterativeData(size) {
+    iterativeData(size) {
         const arr = [];
         for (let i = 0; i < size; i++) {
             arr.push(Ember.Object.create({
@@ -12,7 +12,7 @@ export default Ember.Object.create({
         return arr;
     },
 
-    createRecursiveData(size) {
+    recursiveData(size) {
         const createObj = id => Ember.Object.create({
             id, color: randomColor()
         });
@@ -27,7 +27,7 @@ export default Ember.Object.create({
         return first;
     },
 
-    createCustomData(size) {
+    customData(size) {
         const arr = [];
         for (let i = 0; i < size; i++) {
             arr.push(Ember.Object.create({
