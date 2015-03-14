@@ -12,8 +12,8 @@ const dataArray = function (size) {
     return arr;
 };
 
-const iterativeData = size => dataArray(size);
-const customData = size => dataArray(size);
+const iterativeData = dataArray;
+const customData = dataArray;
 
 const recursiveData = size =>
     dataArray(size)
