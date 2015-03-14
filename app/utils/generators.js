@@ -17,15 +17,15 @@ const customData = dataArray;
 
 const recursiveData = size =>
     dataArray(size)
-        .map((current, index, collection) => current.set('next', collection[index + 1]))
+        .map((current, index, collection) =>
+            current.set('next', collection[index + 1]))
         .get(0);
 
 const cachedData = size =>
     dataArray(size)
         .map(item => item.set(
             'template',
-            `<div class="color-component" style="background-color: ${item.get('color')};">${item.get('id')}</div>`
-        ));
+            `<div class="color-component" style="background-color: ${item.get('color')};">${item.get('id')}</div>`));
 
 export default Ember.Object.create({
     iterativeData,
