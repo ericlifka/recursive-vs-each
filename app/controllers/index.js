@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import Generators from '../utils/generators';
 
 const IndexController = Ember.Controller.extend({
     renderMethod: 'iterative',
@@ -68,10 +69,10 @@ const IndexController = Ember.Controller.extend({
 
     createData(size) {
         switch(this.get('renderMethod')) {
-            case 'recursive': return this.createRecursiveData(size);
-            case 'iterative': return this.createIterativeData(size);
-            case 'custom': return this.createCustomData(size);
-            case 'cached': return this.createCustomData(size);
+            case 'recursive': return Generators.recursiveData(size);
+            case 'iterative': return Generators.iterativeData(size);
+            case 'custom': return Generators.customData(size);
+            case 'cached': return Generators.customData(size);
             default: return [];
         }
     }
