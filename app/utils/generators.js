@@ -1,10 +1,12 @@
+const randomColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+
 export default Ember.Object.create({
     createIterativeData(size) {
         const arr = [];
         for (let i = 0; i < size; i++) {
             arr.push(Ember.Object.create({
                 id: i,
-                color: this.randomColor()
+                color: randomColor()
             }));
         }
         return arr;
@@ -12,7 +14,7 @@ export default Ember.Object.create({
 
     createRecursiveData(size) {
         const createObj = id => Ember.Object.create({
-            id, color: this.randomColor()
+            id, color: randomColor()
         });
 
         const first = createObj(0);
@@ -30,14 +32,10 @@ export default Ember.Object.create({
         for (let i = 0; i < size; i++) {
             arr.push(Ember.Object.create({
                 id: i,
-                color: this.randomColor(),
-                template: `<div class="color-component" style="background-color: ${this.randomColor()};">${i}</div>`
+                color: randomColor(),
+                template: `<div class="color-component" style="background-color: ${randomColor()};">${i}</div>`
             }));
         }
         return arr;
-    },
-
-    randomColor() {
-        return '#'+Math.floor(Math.random()*16777215).toString(16);
     }
 });
