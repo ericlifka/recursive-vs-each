@@ -4,7 +4,7 @@ const randomColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}
 
 const createObj = id => Ember.Object.create({ id, color: randomColor() });
 
-const dataArray = function (size) {
+const dataArray = size => {
     const arr = [];
     for (let i = 0; i < size; i++) {
         arr.push(createObj(i));
