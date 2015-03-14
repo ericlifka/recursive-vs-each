@@ -7,10 +7,7 @@ const createObj = id => Ember.Object.create({ id, color: randomColor() });
 const dataArray = function (size) {
     const arr = [];
     for (let i = 0; i < size; i++) {
-        arr.push(Ember.Object.create({
-            id: i,
-            color: randomColor()
-        }));
+        arr.push(createObj(i));
     }
     return arr;
 };
