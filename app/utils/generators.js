@@ -16,25 +16,18 @@ const dataArray = function (size) {
 };
 
 export default Ember.Object.create({
-    iterativeData(size) {
-        return dataArray(size);
-    },
+    iterativeData: size => dataArray(size),
+    customData: size => dataArray(size),
 
-    recursiveData(size) {
-        return dataArray(size)
+    recursiveData: size =>
+        dataArray(size)
             .map((current, index, collection) => current.set('next', collection[index + 1]))
-            .get(0);
-    },
+            .get(0),
 
-    customData(size) {
-        return dataArray(size);
-    },
-
-    cachedData(size) {
-        return dataArray(size)
+    cachedData: size =>
+        dataArray(size)
             .map(item => item.set(
                 'template',
                 `<div class="color-component" style="background-color: ${item.get('color')};">${item.get('id')}</div>`
-            ));
-    }
+            ))
 });
