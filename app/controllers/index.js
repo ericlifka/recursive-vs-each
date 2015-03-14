@@ -72,7 +72,7 @@ const IndexController = Ember.Controller.extend({
             case 'recursive': return Generators.recursiveData(size);
             case 'iterative': return Generators.iterativeData(size);
             case 'custom': return Generators.customData(size);
-            case 'cached': return Generators.customData(size);
+            case 'cached': return Generators.cachedData(size);
             default: return [];
         }
     }

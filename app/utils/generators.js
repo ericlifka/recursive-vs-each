@@ -27,14 +27,14 @@ export default Ember.Object.create({
     },
 
     customData(size) {
-        const arr = [];
-        for (let i = 0; i < size; i++) {
-            arr.push(Ember.Object.create({
-                id: i,
-                color: randomColor(),
-                template: `<div class="color-component" style="background-color: ${randomColor()};">${i}</div>`
-            }));
-        }
-        return arr;
+        return dataArray(size);
+    },
+
+    cachedData(size) {
+        return dataArray(size)
+            .map(item => item.set(
+                'template',
+                `<div class="color-component" style="background-color: ${item.get('color')};">${item.get('id')}</div>`
+            ));
     }
 });
