@@ -3,8 +3,7 @@ import Ember from 'ember';
 const IndexController = Ember.Controller.extend({
     renderMethod: 'iterative',
     dataStructureSize: null,
-    iterativeDataStructure: null,
-    recursiveDataStructure: null,
+    data: null,
 
     itemCountBreakover: function () {
         const size = this.get('iterativeDataStructure.length');
@@ -43,8 +42,7 @@ const IndexController = Ember.Controller.extend({
         },
 
         clear() {
-            this.set('iterativeDataStructure', null);
-            this.set('recursiveDataStructure', null);
+            this.set('data', null);
             this.set('renderTime', null);
         },
 
@@ -56,19 +54,25 @@ const IndexController = Ember.Controller.extend({
                 return;
             }
 
-            const data = {
-                recursiveDataStructure: this.createRecursiveData(size),
-                iterativeDataStructure: this.createIterativeData(size),
-                customDataStructure: this.createCustomData(size),
-                renderTime: null
-            };
+            this.set('renderTime', null);
+            const data = this.createData(size);
             const start = (new Date()).valueOf();
 
-            this.setProperties(data);   // Trigger Render
+            this.set('data', data);   // Trigger Render
             Ember.run.scheduleOnce('afterRender', () => {
                 const end = (new Date()).valueOf();
                 this.set('renderTime', end - start);
             });
+        }
+    },
+
+    createData(size) {
+        switch(this.get('renderMethod')) {
+            case 'recursive': return this.createRecursiveData(size);
+            case 'iterative': return this.createIterativeData(size);
+            case 'custom': return this.createCustomData(size);
+            case 'cached': return this.createCustomData(size);
+            default: return [];
         }
     },
 

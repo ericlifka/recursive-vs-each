@@ -38,20 +38,20 @@
     <div class="label">Render method: {{renderMethod}}</div>
 
     {{#if recursiveRenderSelected}}
-        {{recursive-color item=recursiveDataStructure}}
+        {{recursive-color item=data}}
     {{/if}}
 
     {{#if iterativeRenderSelected}}
-        {{#each item in iterativeDataStructure}}
+        {{#each item in data}}
             {{iterative-color item=item}}
         {{/each}}
     {{/if}}
 
     {{#if customRenderSelected}}
-        {{custom-color items=customDataStructure}}
+        {{custom-color items=data}}
     {{/if}}
 
     {{#if cachedRenderSelected}}
-        {{cached-color items=customDataStructure}}
+        {{cached-color items=data}}
     {{/if}}
 </div>
