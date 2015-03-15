@@ -8,7 +8,6 @@ const CustomColorComponent = Ember.Component.extend({
     }.observes('items.@each.color'),
 
     render(buffer) {
-        console.log('render');
         const items = this.get('items');
         if (items) {
             items.forEach(item => buffer.push(this.getMarkup(item)));
