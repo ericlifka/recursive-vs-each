@@ -12,13 +12,11 @@ const createObj = id => Ember.Object.create({
     `
 });
 
-const dataArray = size => {
-    const arr = [];
-    for (let i = 0; i < size; i++) {
-        arr.push(createObj(i));
-    }
-    return arr;
-};
+const dataArray = size =>
+    new Array(size)
+        .fill(0)
+        .map((val, index) =>
+            createObj(index));
 
 const dataList = size =>
     dataArray(size)
