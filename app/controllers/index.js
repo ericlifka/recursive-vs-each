@@ -55,15 +55,9 @@ const IndexController = Ember.Controller.extend({
                 return;
             }
 
-            this.set('renderTime', null);
             const data = this.createData(size);
-            const start = (new Date()).valueOf();
-
-            this.set('data', data);   // Trigger Render
-            Ember.run.scheduleOnce('afterRender', () => {
-                const end = (new Date()).valueOf();
-                this.set('renderTime', end - start);
-            });
+            this.runWithTiming(() =>
+                this.set('data', data));
         },
 
         addFront() {
