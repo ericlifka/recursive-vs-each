@@ -80,7 +80,7 @@ const IndexController = Ember.Controller.extend({
     },
 
     createData(size) {
-        this.get('recursiveRenderSelected') ?
+        return this.get('recursiveRenderSelected') ?
             Generators.dataList(size) :
             Generators.dataArray(size)
     }
