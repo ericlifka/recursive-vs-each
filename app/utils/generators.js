@@ -26,4 +26,22 @@ const dataList = size =>
             current.set('next', collection[index + 1]))
         .get(0);
 
-export default Ember.Object.create({ dataArray, dataList });
+export default Ember.Object.create({
+    dataArray, dataList,
+
+    addToListFront() {
+
+    },
+
+    addToArrayFront() {
+
+    },
+
+    addToListEnd() {
+
+    },
+
+    addToArrayEnd() {
+
+    }
+});

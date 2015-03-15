@@ -104,22 +104,6 @@ const IndexController = Ember.Controller.extend({
             default:
                 return Generators.dataArray(size);
         }
-    },
-
-    addToListFront() {
-
-    },
-
-    addToArrayFront() {
-
-    },
-
-    addToListEnd() {
-
-    },
-
-    addToArrayEnd() {
-
     }
 });
 
