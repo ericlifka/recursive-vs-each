@@ -18,13 +18,13 @@
 
 <div class="render-method">
     Rendering Method:
-    <div class="recursive">
-        {{input type="checkbox" checked=recursiveRenderSelected disabled=true}}
-        <label {{action "selectRender" "recursive"}}>Recursive</label>
-    </div>
     <div class="iterative">
         {{input type="checkbox" checked=iterativeRenderSelected disabled=true}}
         <label {{action "selectRender" "iterative"}}>Iterative</label>
+    </div>
+    <div class="recursive">
+        {{input type="checkbox" checked=recursiveRenderSelected disabled=true}}
+        <label {{action "selectRender" "recursive"}}>Recursive</label>
     </div>
     <div class="custom">
         {{input type="checkbox" checked=customRenderSelected disabled=true}}
