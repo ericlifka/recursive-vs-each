@@ -38,7 +38,7 @@ export default Ember.Object.create({
     },
 
     addToArrayFront(array) {
-
+        array.unshiftObject(createObj(array.get('0.id') - 1));
     },
 
     addToArrayEnd(array) {
