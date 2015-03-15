@@ -64,17 +64,59 @@ const IndexController = Ember.Controller.extend({
                 const end = (new Date()).valueOf();
                 this.set('renderTime', end - start);
             });
+        },
+
+        addFront() {
+            switch (this.get('renderMethod')) {
+                case 'recursive':
+                    this.addToListFront();
+                    break;
+                case 'iterative':
+                case 'custom':
+                case 'cached':
+                    this.addToArrayFront();
+                    break;
+            }
+        },
+
+        addEnd() {
+            switch (this.get('renderMethod')) {
+                case 'recursive':
+                    this.addToListEnd();
+                    break;
+                case 'iterative':
+                case 'custom':
+                case 'cached':
+                    this.addToArrayEnd();
+                    break;
+            }
         }
     },
 
     createData(size) {
-        switch(this.get('renderMethod')) {
+        switch (this.get('renderMethod')) {
             case 'recursive': return Generators.recursiveData(size);
             case 'iterative': return Generators.iterativeData(size);
             case 'custom': return Generators.customData(size);
             case 'cached': return Generators.cachedData(size);
             default: return [];
         }
+    },
+
+    addToListFront() {
+
+    },
+
+    addToArrayFront() {
+
+    },
+
+    addToListEnd() {
+
+    },
+
+    addToArrayEnd() {
+
     }
 });
 
