@@ -29,19 +29,19 @@ const dataList = size =>
 export default Ember.Object.create({
     dataArray, dataList,
 
-    addToListFront() {
+    addToListFront(head) {
 
     },
 
-    addToArrayFront() {
+    addToListEnd(head) {
 
     },
 
-    addToListEnd() {
+    addToArrayFront(array) {
 
     },
 
-    addToArrayEnd() {
+    addToArrayEnd(array) {
 
     }
 });

@@ -68,13 +68,13 @@ const IndexController = Ember.Controller.extend({
 
         addFront: () =>
             this.get('recursiveRenderSelected') ?
-                Generators.addToListFront() :
-                Generators.addToArrayFront(),
+                Generators.addToListFront(this.get('data')) :
+                Generators.addToArrayFront(this.get('data')),
 
         addEnd: () =>
             this.get('recursiveRenderSelected') ?
-                Generators.addToListEnd() :
-                Generators.addToArrayEnd()
+                Generators.addToListEnd(this.get('data')) :
+                Generators.addToArrayEnd(this.get('data'))
     },
 
     createData: size =>
