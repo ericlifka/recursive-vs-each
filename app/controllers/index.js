@@ -66,45 +66,21 @@ const IndexController = Ember.Controller.extend({
             });
         },
 
-        addFront() {
-            switch (this.get('renderMethod')) {
-                case 'recursive':
-                    this.addToListFront();
-                    break;
-                case 'iterative':
-                case 'custom':
-                case 'cached':
-                    this.addToArrayFront();
-                    break;
-            }
-        },
+        addFront: () =>
+                this.get('recursiveRenderSelected') ?
+                    Generators.addToListFront() :
+                    Generators.addToArrayFront(),
 
-        addEnd() {
-            switch (this.get('renderMethod')) {
-                case 'recursive':
-                    this.addToListEnd();
-                    break;
-                case 'iterative':
-                case 'custom':
-                case 'cached':
-                    this.addToArrayEnd();
-                    break;
-            }
-        }
+        addEnd: () =>
+            this.get('recursiveRenderSelected') ?
+                    Generators.addToListEnd() :
+                    Generators.addToArrayEnd()
     },
 
-    createData(size) {
-        switch (this.get('renderMethod')) {
-            case 'recursive':
-                return Generators.dataList(size);
-
-            case 'iterative':
-            case 'custom':
-            case 'cached':
-            default:
-                return Generators.dataArray(size);
-        }
-    }
+    createData: size =>
+        this.get('recursiveRenderSelected') ?
+            Generators.dataList(size) :
+            Generators.dataArray(size)
 });
 
 export default IndexController;
