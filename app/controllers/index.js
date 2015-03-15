@@ -95,11 +95,14 @@ const IndexController = Ember.Controller.extend({
 
     createData(size) {
         switch (this.get('renderMethod')) {
-            case 'recursive': return Generators.recursiveData(size);
-            case 'iterative': return Generators.iterativeData(size);
-            case 'custom': return Generators.customData(size);
-            case 'cached': return Generators.cachedData(size);
-            default: return [];
+            case 'recursive':
+                return Generators.dataList(size);
+
+            case 'iterative':
+            case 'custom':
+            case 'cached':
+            default:
+                return Generators.dataArray(size);
         }
     },
 
