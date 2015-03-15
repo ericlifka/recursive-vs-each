@@ -67,15 +67,17 @@ const IndexController = Ember.Controller.extend({
         },
 
         addFront() {
-            this.get('recursiveRenderSelected') ?
-                Generators.addToListFront(this.get('data')) :
-                Generators.addToArrayFront(this.get('data'))
+            this.runWithTiming(() =>
+                this.get('recursiveRenderSelected') ?
+                    Generators.addToListFront(this.get('data')) :
+                    Generators.addToArrayFront(this.get('data')));
         },
 
         addEnd() {
-            this.get('recursiveRenderSelected') ?
-                Generators.addToListEnd(this.get('data')) :
-                Generators.addToArrayEnd(this.get('data'))
+            this.runWithTiming(() =>
+                this.get('recursiveRenderSelected') ?
+                    Generators.addToListEnd(this.get('data')) :
+                    Generators.addToArrayEnd(this.get('data')));
         }
     },
 
@@ -83,6 +85,16 @@ const IndexController = Ember.Controller.extend({
         return this.get('recursiveRenderSelected') ?
             Generators.dataList(size) :
             Generators.dataArray(size)
+    },
+
+    runWithTiming(runnable) {
+        this.set('renderTime', null);
+        const start = new Date().valueOf();
+        runnable();
+        Ember.run.scheduleOnce('afterRender', () => {
+            const end = new Date().valueOf();
+            this.set('renderTime', end - start);
+        });
     }
 });
 
