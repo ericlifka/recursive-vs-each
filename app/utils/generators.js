@@ -25,6 +25,8 @@ const dataList = size => Ember.Object.create({
         .get(0)
 });
 
+const getLast = list => !list.get('next') ? list : getLast(list.get('next'));
+
 export default Ember.Object.create({
     dataArray,
     dataList,
@@ -34,7 +36,9 @@ export default Ember.Object.create({
             createObj(list.get('head.id') - 1)
                 .set('next', list.get('head'))),
 
-    addToListEnd(head) {
+    addToListEnd: list => {
+        let last = getLast(list.get('head'));
+        last.set('next', createObj(last.get('id') + 1));
     },
 
     addToArrayFront: array =>
