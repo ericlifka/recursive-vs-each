@@ -27,23 +27,27 @@ const dataList = size => Ember.Object.create({
 
 const getLast = list => !list.get('next') ? list : getLast(list.get('next'));
 
+const addToListFront = list =>
+    list.set('head',
+        createObj(list.get('head.id') - 1)
+            .set('next', list.get('head')));
+
+const addToListEnd = list => {
+    let last = getLast(list.get('head'));
+    last.set('next', createObj(last.get('id') + 1));
+};
+
+const addToArrayFront = array =>
+    array.unshiftObject(createObj(array.get('firstObject.id') - 1));
+
+const addToArrayEnd = array =>
+    array.pushObject(createObj(array.get('lastObject.id') + 1));
+
 export default Ember.Object.create({
     dataArray,
     dataList,
-
-    addToListFront: list =>
-        list.set('head',
-            createObj(list.get('head.id') - 1)
-                .set('next', list.get('head'))),
-
-    addToListEnd: list => {
-        let last = getLast(list.get('head'));
-        last.set('next', createObj(last.get('id') + 1));
-    },
-
-    addToArrayFront: array =>
-        array.unshiftObject(createObj(array.get('firstObject.id') - 1)),
-
-    addToArrayEnd: array =>
-        array.pushObject(createObj(array.get('lastObject.id') + 1))
+    addToListFront,
+    addToListEnd,
+    addToArrayFront,
+    addToArrayEnd
 });
