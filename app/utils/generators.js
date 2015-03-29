@@ -18,21 +18,21 @@ const dataArray = size =>
         .map((val, index) =>
             createObj(index));
 
-const dataList = size =>
-    dataArray(size)
+const dataList = size => Ember.Object.create({
+    head: dataArray(size)
         .map((current, index, collection) =>
             current.set('next', collection[index + 1]))
-        .get(0);
+        .get(0)
+});
 
 export default Ember.Object.create({
-    dataArray, dataList,
+    dataArray,
+    dataList,
 
     addToListFront(head) {
-
     },
 
     addToListEnd(head) {
-
     },
 
     addToArrayFront: array =>
