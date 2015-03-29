@@ -12,11 +12,11 @@
     "build": "ember build",
     "test": "ember test"
   },
-  "repository": "",
+  "repository": "https://github.com/ericlifka/recursive-vs-each.git",
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "https://github.com/ericlifka",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.0.0",
