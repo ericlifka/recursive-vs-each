@@ -29,8 +29,10 @@ export default Ember.Object.create({
     dataArray,
     dataList,
 
-    addToListFront(head) {
-    },
+    addToListFront: list =>
+        list.set('head',
+            createObj(list.get('head.id') - 1)
+                .set('next', list.get('head'))),
 
     addToListEnd(head) {
     },
