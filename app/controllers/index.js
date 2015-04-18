@@ -1,4 +1,6 @@
 import Ember from 'ember';
+import computedDecorator from 'ember-computed-decorators';
+
 import Generators from '../utils/generators';
 
 const IndexController = Ember.Controller.extend({
@@ -19,9 +21,10 @@ const IndexController = Ember.Controller.extend({
         }
     }.property('iterativeDataStructure.length'),
 
-    recursiveRenderSelected: function () {
-        return this.get('renderMethod') === 'recursive';
-    }.property('renderMethod'),
+    @computedDecorator('renderMethod')
+    recursiveRenderSelected(renderMethod) {
+        return renderMethod === 'recursive';
+    },
 
     iterativeRenderSelected: function () {
         return this.get('renderMethod') === 'iterative';
