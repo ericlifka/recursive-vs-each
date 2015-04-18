@@ -7,19 +7,7 @@ const IndexController = Ember.Controller.extend({
     renderMethod: 'iterative',
     dataStructureSize: null,
     data: null,
-
-    itemCountBreakover: function () {
-        const size = this.get('iterativeDataStructure.length');
-        if (size <= 10) {
-            return "small";
-        }
-        else if (size <= 100) {
-            return "medium";
-        }
-        else {
-            return "large";
-        }
-    }.property('iterativeDataStructure.length'),
+    itemCountBreakOver: 'large',
 
     @computed('renderMethod')
     recursiveRenderSelected(renderMethod) {
@@ -60,6 +48,9 @@ const IndexController = Ember.Controller.extend({
                 this.send('clear');
                 return;
             }
+            else {
+                this.setItemCountBreakOver(size);
+            }
 
             const data = this.createData(size);
             this.runWithTiming(() =>
@@ -95,6 +86,18 @@ const IndexController = Ember.Controller.extend({
             const end = new Date().valueOf();
             this.set('renderTime', end - start);
         });
+    },
+
+    setItemCountBreakOver(size) {
+        if (size <= 10) {
+            this.set('itemCountBreakOver', "small");
+        }
+        else if (size <= 100) {
+            this.set('itemCountBreakOver', "medium");
+        }
+        else {
+            this.set('itemCountBreakOver', "large");
+        }
     }
 });
 
