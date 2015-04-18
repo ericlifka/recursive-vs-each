@@ -26,18 +26,20 @@ const IndexController = Ember.Controller.extend({
         return renderMethod === 'recursive';
     },
 
+    @computed('renderMethod')
+    iterativeRenderSelected(renderMethod) {
+        return renderMethod === 'iterative';
+    },
 
-    iterativeRenderSelected: function () {
-        return this.get('renderMethod') === 'iterative';
-    }.property('renderMethod'),
+    @computed('renderMethod')
+    customRenderSelected(renderMethod) {
+        return renderMethod === 'custom';
+    },
 
-    customRenderSelected: function () {
-        return this.get('renderMethod') === 'custom';
-    }.property('renderMethod'),
-
-    cachedRenderSelected: function () {
-        return this.get('renderMethod') === 'cached';
-    }.property('renderMethod'),
+    @computed('renderMethod')
+    cachedRenderSelected(renderMethod) {
+        return renderMethod === 'cached';
+    },
 
     actions: {
         selectRender(type) {
