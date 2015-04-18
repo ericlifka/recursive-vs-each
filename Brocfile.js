@@ -2,7 +2,11 @@
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
-var app = new EmberApp();
+var app = new EmberApp({
+  babel: {
+    optional: ['es7.decorators']
+  }
+});
 
 app.import('vendor/browser-polyfill.js');
 
