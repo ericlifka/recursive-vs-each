@@ -3,26 +3,27 @@ import Ember from 'ember';
 import Generators from '../utils/generators';
 
 const IndexController = Ember.Controller.extend({
-    renderMethod: 'iterative',
     dataStructureSize: null,
     data: null,
     itemCountBreakOver: 'large',
 
-    recursiveRenderSelected: function() {
-        return this.get('renderMethod') === 'recursive';
-    }.property('renderMethod'),
+    renderMethod: Ember.computed({
+        get() {
+            this.set('renderMethod', 'iterative');
+            return 'iterative';
+        },
 
-    iterativeRenderSelected: function() {
-        return this.get('renderMethod') === 'iterative';
-    }.property('renderMethod'),
+        set(keyName, renderMethod) {
+            this.setProperties({
+                recursiveRenderSelected: renderMethod === 'recursive',
+                iterativeRenderSelected: renderMethod === 'iterative',
+                customRenderSelected: renderMethod === 'custom',
+                cachedRenderSelected: renderMethod === 'cached'
+            });
 
-    customRenderSelected: function() {
-        return this.get('renderMethod') === 'custom';
-    }.property('renderMethod'),
-
-    cachedRenderSelected: function() {
-        return this.get('renderMethod') === 'cached';
-    }.property('renderMethod'),
+            return renderMethod;
+        }
+    }),
 
     actions: {
         selectRender(type) {
