@@ -3,9 +3,13 @@ import Ember from 'ember';
 import Generators from '../utils/generators';
 
 const IndexController = Ember.Controller.extend({
-    dataStructureSize: null,
     data: null,
+    dataStructureSize: null,
     itemCountBreakOver: 'large',
+
+    renderPaneClass: Ember.computed('itemCountBreakOver', function () {
+        return `render-pane ${this.get('itemCountBreakOver')}`;
+    }),
 
     renderMethod: Ember.computed({
         get() {
