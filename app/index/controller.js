@@ -18,12 +18,12 @@ const IndexController = Ember.Controller.extend({
         },
 
         set(keyName, renderMethod) {
-            this.setProperties({
+            Ember.run.next(() => this.setProperties({
                 recursiveRenderSelected: renderMethod === 'recursive',
                 iterativeRenderSelected: renderMethod === 'iterative',
                 customRenderSelected: renderMethod === 'custom',
                 cachedRenderSelected: renderMethod === 'cached'
-            });
+            }));
 
             return renderMethod;
         }
