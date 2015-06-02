@@ -6,7 +6,7 @@ const IterativeColorComponent = Ember.Component.extend({
     item: null,
 
     style: function () {
-        return `background-color: ${this.get('item.color')};`;
+        return `background-color: ${this.get('item.color')};`.htmlSafe();
     }.property('item.color')
 });
 
